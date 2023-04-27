@@ -7,7 +7,7 @@ This repo adds support for object License Plate Recognition on top of edgeai-gst
 - [Supported Devices](#supported-devices)
 - [Steps to run](#steps-to-run)
 - [Result](#result)
-- [License Plate Recognition](#about-License Plate Recognition)
+- [License Plate Recognition](#About-License-Plate-Recognition)
 - [Model Directory](#model-directory)
 - [How to add your own custom post-processing?](#how-to-add-your-own-custom-post-processing)
 ## Supported Devices
@@ -103,11 +103,8 @@ The code changes done to add post-processing logic for LPR can be found in this 
 
 ### Post Processing Logic Python Based Flow
 
-'''
+```
 class PostProcess:
-    """
-    Class to create a post process context
-    """
 
     def __init__(self, flow):
         self.flow = flow
@@ -129,11 +126,11 @@ class PostProcess:
             return PostProcessSegmentation(flow)
         elif (flow.model.task_type == 'licence_plate_recognition'):
             return PostProcessLPR(flow)
-'''
+```
 
 Add your custom post processing class along with other supported post processing types in post_process.py as mentioned above.
 
-'''
+```
 class PostProcessLPR(PostProcess):
     def __init__(self, flow):
         super().__init__(flow)
@@ -199,13 +196,13 @@ class PostProcessLPR(PostProcess):
             self.debug_str = ""
 
         return img
-'''
+```
 
 Implement Custom Post Processing class body inside post_process.py file. Example, For License Plate Recognition we have implemented class as mentioned above.
 
 ### Post Processing Logic CPP Based Flow
 
-'''
+```
     class PostprocessImageObjDetectLPR : public PostprocessImage
     {
         public:
@@ -250,14 +247,14 @@ Implement Custom Post Processing class body inside post_process.py file. Example
             PostprocessImageObjDetectLPR &
                 operator=(const PostprocessImageObjDetectLPR& rhs) = delete;
     };
-'''
+```
 
 Define new custom post processing class definition inside /opt/edgeai-gst-apps-lpr/apps_cpp/common/include/, Refer above mentioned example for reference. Here we have added class definition at edgeai-gst-apps-lpr/apps_cpp/common/include/post_process_image_object_detect_lpr.h
 
 Create new cpp file inside src directory and implement custom post processing class body.
 Refer edgeai-gst-apps-lpr/apps_cpp/common/src/post_process_image_object_detect_LPR.cpp for better understanding.
 
-'''
+```
 PostprocessImage* PostprocessImage::makePostprocessImageObj(const PostprocessImageConfig    &config,
                                                             const DebugDumpConfig           &debugConfig)
 {
@@ -287,11 +284,11 @@ PostprocessImage* PostprocessImage::makePostprocessImageObj(const PostprocessIma
     return cntxt;
 }
 
-'''
+```
 
 Based on post processing type create new object of that class inside edgeai-gst-apps-lpr/apps_cpp/common/src/ directory. Refer above example for better understanding.
 
-'''
+```
 cmake_minimum_required(VERSION 3.10.0)
 
 project(edgeai_common)
@@ -316,6 +313,6 @@ set(EDGEAI_COMMON_SRCS
     src/edgeai_debug.cpp)
 
 build_lib(${PROJECT_NAME} EDGEAI_COMMON_SRCS STATIC)
-'''
+```
 
 Add newly added files inside cmakelist, present at edgeai-gst-apps-lpr/apps_cpp/common/CMakeLists.txt, refer above cmakefile for reference.
