@@ -5,6 +5,7 @@ This repo adds support for object License Plate Recognition on top of edgeai-gst
 
 ## Table of content
 - [Supported Devices](#supported-devices)
+- [SDK Version](#sdk-version)
 - [Steps to run](#steps-to-run)
 - [Result](#result)
 - [License Plate Recognition](#About-License-Plate-Recognition)
@@ -15,6 +16,10 @@ This repo adds support for object License Plate Recognition on top of edgeai-gst
 | **DEVICE**              | **Supported**      |
 | :---:                   | :---:              |
 | SK-TDA4VM               | :heavy_check_mark: |
+
+## SDK Version
+
+This demo is supported on **EdgeAI SDK Version 8.6**
 
 ## Steps to run
 
